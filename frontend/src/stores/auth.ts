@@ -19,7 +19,10 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = tokens.access_token
       refreshToken.value = tokens.refresh_token
       setTokens(tokens.access_token, tokens.refresh_token)
-      await fetchUser()
+      try {
+        await fetchUser()
+      } catch {
+      }
     } finally {
       loading.value = false
     }

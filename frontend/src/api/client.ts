@@ -50,6 +50,12 @@ client.interceptors.response.use(
       }
       return Promise.reject(new Error(body.message || '请求失败'))
     }
+    if (body && typeof body.code === 'number') {
+      if (body.code === 0) {
+        return body.data
+      }
+      return Promise.reject(new Error(body.message || '请求失败'))
+    }
     return response.data
   },
   (error) => {
